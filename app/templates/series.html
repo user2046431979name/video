@@ -1,0 +1,98 @@
+{% extends 'base.html'%}
+
+
+{% block content %}
+<style>
+     .container{
+        display:flex;
+        flex-wrap:nowrap;
+        position:absolute;
+        top:30%;
+        left:5%;
+
+     }
+     .box{
+        width:50px;
+        height:50px;
+        text-align:center;
+        border:1px solid white;
+        margin-left:10px;
+        transition:1s ease;
+     }
+     .box:hover{
+        background:aqua;
+        box-shadow:1px 1px 20px aqua,-1px -1px 20px aqua;
+     }
+     .desc{
+        position:absolute;
+        top:90%;
+     }
+</style>
+<div class="container">
+{% for item in info %}
+     <a href="{% url 'video' team.id %}">
+     <div class="box">
+           <h2>{{ item.number }}</h2>
+
+     </div>
+     </a>
+{% endfor %}
+
+</div>
+<p class="desc">{{team.description}}</p>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

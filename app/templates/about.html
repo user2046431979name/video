@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+     body{
+       color:white;
+       background:linear-gradient(90deg,black,purple);
+       margin:0;
+       padding:25px;
+       padding-left:25px;
+     }
+     .home{
+       background:transparent;
+       border:solid black;
+       color:white;
+       border-radius:50%;
+       font-size:2em;
+       width:65px;
+       height:65px;
+       position:absolute;
+       top:0px;
+       left:5px;
+       transition:1s ease;
+
+}
+     .home:hover{
+        color: black;
+        background: aqua;
+
+}
+     </style>
+</head>
+<body>
+     <a href="{% url 'index'%}"><button class="home" >&#10006;</button></a>
+</body>
+</html>
