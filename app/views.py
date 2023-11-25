@@ -46,12 +46,19 @@ def index(request):
 
 
 def series(request,id):
+    if request.method == 'POST':
+        text = request.POST.get('text')
+        teamobject = Team.objects.get(id = id)
+        Comments.objects.create(text = text,teamobject = teamobject,author = request.user)
 
     num_vid = Videos.objects.filter(teamobject__id = id)
+
     team = Team.objects.get(id = id)
+    comments = Comments.objects.filter(teamobject = team)
     contex = {
         'info':num_vid,
-        'team':team
+        'team':team,
+        'comments':comments,
 
     }
 

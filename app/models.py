@@ -27,6 +27,6 @@ class Message(models.Model):
 
 
 class Comments(models.Model):
-    text = models.TextField()
+    text = models.TextField(blank=True)
     teamobject = models.ForeignKey(Team,on_delete=models.CASCADE)
-    user = models.CharField(max_length=250)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
