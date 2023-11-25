@@ -13,16 +13,18 @@
       flex-wrap:wrap;
       justify-content: flex-start;
    }
-   .card{
+  .card{
       border-radius:20px 0px 20px 0px;
       background: transparent;
       border:1px solid white;
       height:300px;
-      width:200px;
+      width:150px;
       display: inline-block;
       vertical-align: top;
       margin:25px;
       text-align: center;
+      opacity:0.6;
+      transition:1s ease;
 
    }
    img{
@@ -79,7 +81,15 @@
       <p>{{i.title}}</p>
        <h4>{{i.counter}} просмотров </h4>
         <h4>{{i.videos_set.all.count}} серий</h4>
+    {% if user.is_authenticated%}
+    <form method="post">
+        {% csrf_token %}
+        <input value="{{i.id}}" name="teamObject" style="width:0;height:0;background: transparent;border:0;">
+        <button style="border: 0px ; font-size: 1.5em;" type="submit">&#9825;  {{i.count_likes}}</button>
+    </form>
+        {% else %}
 
+        {% endif %}
     </div>
     {% endfor %}
     </div>

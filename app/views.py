@@ -109,7 +109,17 @@ class SignUp(CreateView):
 
 def allVideos(request):
     team = Team.objects.all()
+    if request.method == 'POST':
+        user = request.user
 
+        team_id = request.POST.get('teamObject')
+        teamObject = Team.objects.get(id=team_id)
+        try:
+            like_object = Like.objects.get(author=user, teamObject=teamObject)
+            like_object.delete()
+
+        except Like.DoesNotExist:
+            Like.objects.create(author=user, teamObject=teamObject)
     query = request.GET.get('query')
 
     paginator = Paginator(team,3)
