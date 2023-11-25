@@ -4,6 +4,7 @@ from .models import *
 admin.site.register(Team)
 admin.site.register(Videos)
 admin.site.register(Admin)
-admin.site.register(Message)
+
 admin.site.register(Comments)
+admin.site.register(Like)
 

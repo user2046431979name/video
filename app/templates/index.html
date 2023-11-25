@@ -17,7 +17,7 @@
       border-radius:20px 0px 20px 0px;
       background: transparent;
       border:1px solid white;
-      height:260px;
+      height:300px;
       width:150px;
       display: inline-block;
       vertical-align: top;
@@ -30,7 +30,7 @@
    .card:hover{
       opacity:1;
       width:200px;
-      height:310px;
+      height:340px;
    }
    img{
       border-radius:20px 10px 20px 10px;
@@ -55,12 +55,7 @@
       left:300px;
 
    }
-   .message{
-       position:absolute;
-       top:250px;
-       left:1000px;
 
-   }
 
 </style>
               <div class="auth">
@@ -86,31 +81,21 @@
 
       <p>{{i.title}}</p>
         <h4>{{i.counter}} просмотров </h4>
-        <h4>{{i.videos_set.all.count}} серий</h4>
+        <h4>{{i.count_videos}} серий</h4>
+     {% if user.is_authenticated%}
+    <form method="post">
+        {% csrf_token %}
+        <input value="{{i.id}}" name="teamObject" style="width:0;height:0;background: transparent;border:0;">
+        <button style="border: 0px ; font-size: 1.5em;" type="submit">&#9825;  {{i.count_likes}}</button>
+    </form>
+        {% else %}
 
 
+        {% endif %}
     </div>
     {% endfor %}
 </div>
 
-<div class="message">
-    {% if user.is_authenticated%}
-    <h1>напишите отзыв</h1>
-    <p>Это тестовый сайт для просмтра видеороликов <br>
-        админ панель,регистрация,пагинации <br>
-        поиск видео просмотр видео
-    </p>
-
-    <form method="post" action="{% url 'index'%}">
-        {% csrf_token%}
-        <input placeholder="напишите отзыв" name="message">
-        <button type="submit" class="mess_button" >отправить</button>
-    </form>
-    {% else %}
-    <h1>вы не зарегистрированы
-    </h1>
-    {% endif %}
-</div>
 
 
 {% endblock %}

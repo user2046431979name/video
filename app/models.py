@@ -15,18 +15,25 @@ class Team(models.Model):
     counter = models.IntegerField(default=0)
     def count_videos(self):
         return self.videos_set.count()
-
+    def count_likes(self):
+        return self.like_set.count()
 class Videos(models.Model):
     teamobject = models.ForeignKey(Team, on_delete=models.CASCADE)
     videos = models.FileField()
     title = models.CharField(max_length=100)
     number = models.IntegerField()
-class Message(models.Model):
-    message = models.TextField()
-    user = models.CharField(max_length=250)
+
 
 
 class Comments(models.Model):
     text = models.TextField(blank=True)
     teamobject = models.ForeignKey(Team,on_delete=models.CASCADE)
     author = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+
+class Like(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    teamObject = models.ForeignKey(Team,on_delete=models.CASCADE)
+
+
+
+

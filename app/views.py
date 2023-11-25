@@ -28,8 +28,16 @@ def index(request):
 
 
     if request.method == 'POST':
-        message = request.POST.get('message')
-        Message.objects.create(message = message,user = request.user.username)
+        user = request.user
+
+        team_id = request.POST.get('teamObject')
+        teamObject = Team.objects.get(id=team_id)
+        try:
+            like_object = Like.objects.get(author=user, teamObject=teamObject)
+            like_object.delete()
+
+        except Like.DoesNotExist:
+             Like.objects.create(author=user, teamObject=teamObject)
 
 
 
@@ -59,7 +67,6 @@ def series(request,id):
         'info':num_vid,
         'team':team,
         'comments':comments,
-
     }
 
     return render(request,'series.html',contex)

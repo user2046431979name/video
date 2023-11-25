@@ -14,6 +14,7 @@ urlpatterns = [
     path('video/<int:id>',detailVideo,name='video'),
     path('allvideo/',allVideos,name='all_videos'),
 
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL,

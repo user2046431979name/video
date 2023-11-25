@@ -28,29 +28,36 @@
         width:450px;
         height:270px;
         background: transparent;
+        border-radius: 5px;
+        border:1px solid white ;
         overflow-y: scroll;
         position:absolute;
-        top:70%;
+        top:69%;
         right:0%;
 
      }
      .comment{
         background: transparent;
-        width:300px;
-        height: 100px;
+
+        max-width:300px;
+        margin-top:15px ;
         margin-bottom:50px;
         margin-left: 50px;
         padding-left:25px;
         border-radius: 6px;
         border: 1px solid white;
      }
+
      .comm_write{
         background: transparent;
         height:25px;
         width:300px;
         color: white;
         border-radius: 4px;
-        border: 1px white;
+        border: 1px solid white;
+     }
+     .username{
+        color: purple;
      }
 </style>
 <div class="container">
@@ -70,7 +77,7 @@
 {% if user.is_authenticated%}
  <form method="post" style=" position:absolute;top:65%;right:0%;">
         {% csrf_token %}
-        <input class="comm_write" name="text" placeholder="оставьте коммент">
+        <input class="comm_write" style="word-wrap: break-word;" name="text" placeholder="оставьте коммент">
         <button type="submit" style="margin-left:10px;">submit</button>
     </form>
 {% else %}
@@ -80,7 +87,7 @@
     {% for row in comments%}
     <div class="comment">
     <h5 class="username">{{row.author}}</h5>
-       <h1 class="comm">{{row.text}}</h1>
+       <h3 class="comm" style="word-wrap: break-word;">{{row.text}}</h3>
     </div>
     {% endfor %}
 </div>
