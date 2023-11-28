@@ -1,0 +1,155 @@
+{% extends 'base.html'%}
+
+
+{% block content %}
+<style>
+     .container{
+        display:flex;
+        flex-wrap:nowrap;
+        position:absolute;
+        top:30%;
+        left:5%;
+
+     }
+     .box{
+        width:50px;
+        height:50px;
+        text-align:center;
+        border:1px solid white;
+        margin-left:10px;
+        transition:1s ease;
+     }
+     .box:hover{
+        background:aqua;
+        box-shadow:1px 1px 20px aqua,-1px -1px 20px aqua;
+     }
+
+     .comments{
+        width:450px;
+        height:270px;
+        background: transparent;
+        border-radius: 5px;
+        border:1px solid white ;
+        overflow-y: scroll;
+        position:absolute;
+        top:69%;
+        right:0%;
+
+     }
+     .comment{
+        background: transparent;
+
+        max-width:300px;
+        margin-top:15px ;
+        margin-bottom:50px;
+        margin-left: 50px;
+        padding-left:25px;
+        border-radius: 6px;
+        border: 1px solid white;
+     }
+
+     .comm_write{
+        background: transparent;
+        height:25px;
+        width:300px;
+        color: white;
+        border-radius: 4px;
+        border: 1px solid white;
+     }
+     .username{
+        color: purple;
+     }
+</style>
+<div class="container">
+{% for item in info %}
+     <a href="{% url 'video' team.id %}">
+     <div class="box">
+           <h2>{{ item.number }}</h2>
+
+     </div>
+     </a>
+{% endfor %}
+
+
+
+</div>
+
+{% if user.is_authenticated%}
+ <form method="post" style=" position:absolute;top:65%;right:0%;">
+        {% csrf_token %}
+        <input class="comm_write" style="word-wrap: break-word;" name="text" placeholder="оставьте коммент">
+        <button type="submit" style="margin-left:10px;">submit</button>
+    </form>
+{% else %}
+
+{% endif %}
+
+<h4 style="position: absolute; top:60%; right: 10%;">{{num_comm}} комментариев</h4>
+<div class="comments">
+    
+    {% for row in comments%}
+    <div class="comment">
+    <h5 class="username">{{row.author}}</h5>
+       <h3 class="comm" style="word-wrap: break-word;">{{row.text}}</h3>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

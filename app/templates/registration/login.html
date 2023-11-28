@@ -1,0 +1,51 @@
+<style>
+    body{
+       padding-left:550px;
+       display:flex;
+       color:white;
+       background:linear-gradient(90deg,black,blue);
+
+    }
+    div{
+       width:400px;
+       height:500px;
+       display:flex;
+       background:transparent;
+       border-radius: 15px;
+       border:1px solid white;
+       align-items: center;
+       margin-top:200px;
+       margin-left:180px;
+    }
+    input{
+       background:transparent;
+       color:white;
+
+       margin:40px;
+       width:90%;
+       height:40px;
+       border-radius: 5px;
+       border:1px solid white;
+       transition:1s ease ;
+    }
+    input:hover{
+       background:aqua;
+       box-shadow:1px 1px 30px aqua,-1px -1px 30px aqua;
+
+    }
+
+</style>
+<body>
+<div>
+<form method="post">
+        {% csrf_token %}
+         <table>
+            {{ form.as_p }}
+            <tr>
+              <td>&nbsp;</td>
+              <td><input type="submit" value="Submit"></td>
+            </tr>
+          </table>
+</form>
+    </div>
+</body>

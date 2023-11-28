@@ -1,0 +1,113 @@
+{% extends 'base.html'%}
+{%load static%}
+
+{% block content %}
+<style>
+    .all_card{
+      width:1500px;
+      height:500px;
+      position:absolute;
+      top:165px;
+      left:20px;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content: flex-start;
+   }
+  .card{
+      border-radius:20px 0px 20px 0px;
+      background: transparent;
+      border:1px solid white;
+      height:300px;
+      width:150px;
+      display: inline-block;
+      vertical-align: top;
+      margin:25px;
+      text-align: center;
+      opacity:0.6;
+      transition:1s ease;
+
+   }
+   img{
+      border-radius:20px 10px 20px 10px;
+      transition:1s ease;
+   }
+   img:hover{
+      height:140px;
+      width:140px;
+      box-shadow:1px 1px 30px white,-1px -1px 30px white;
+   }
+   .search{
+      display: flex;
+      flex-wrap: wrap;
+      position:fixed;
+      top:43px;
+      left:125px;
+      z-index:3;
+   }
+   .paginator{
+       text-align:center;
+       display:flex;
+       position:absolute;
+       top:90%;
+       left:30px;
+   }
+   .pages{
+        width:50px;
+        height:50px;
+        text-align:center;
+        border:1px solid white;
+        margin-left:30px;
+        margin-bottom:30px;
+        transition:1s ease;
+     }
+    .pages:hover{
+        background:aqua;
+        box-shadow:1px 1px 20px aqua,-1px -1px 20px aqua;
+    }
+
+</style>
+ <div class="search">
+           <form method="get" action="">
+                <input type="text" name="query" placeholder="Поиск">
+                <button type="submit">Искать</button>
+           </form>
+           <form method="get" action="">
+            <input style="width: 0; height: 0; border: 0;" type="text" name="popularity" value="popularity">
+            <button type="submit" style="width:150px;">по просмотрам</button>
+            </form>
+            <form method="get" action="">
+                <input style="width: 0; height: 0; border: 0;" type="text" name="like_filter" value="like_filter">
+                <button type="submit" style="width:150px;">по количеству лайков</button>
+            </form>
+    </div>
+
+
+
+<div class="all_card">
+ {% for i in team%}
+    <div class="card">
+      <a href="{% url 'series' i.id %}"><img src="{{ i.cover.url }}" width="100px" height="100px"></a>
+
+      <p>{{i.title}}</p>
+       <h4>{{i.counter}} просмотров </h4>
+        <h4>{{i.videos_set.all.count}} серий</h4>
+    {% if user.is_authenticated%}
+    <form method="post">
+        {% csrf_token %}
+        <input value="{{i.id}}" name="teamObject" style="width:0;height:0;background: transparent;border:0;">
+        <button style="border: 0px ; font-size: 1.5em;" type="submit">&#9825;  {{i.count_likes}}</button>
+    </form>
+        {% else %}
+
+        {% endif %}
+    </div>
+    {% endfor %}
+    </div>
+    <div class="paginator">
+
+                 {% for i in pages%}
+				          <a href="http://127.0.0.1:8000/allvideo/?page={{i}}"><div class="pages"><h3>{{i}}</h3></div></a>
+				 {% endfor %}
+
+    </div>
+{% endblock %}

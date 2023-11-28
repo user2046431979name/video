@@ -1,0 +1,67 @@
+{% extends 'base.html'%}
+{%load static%}
+
+{% block content %}
+<style>
+
+    .video{
+        width:1000px;
+        height:500px;
+        margin-top:95px;
+    }
+    .nextvideo{
+        color:aqua;
+        width:50px;
+        height:100px;
+        transition:1s ease;
+        font-size:70px;
+        border-radius:50%;
+        position:absolute;
+        top:600px;
+        left:1400px;
+    }
+    .nextvideo:hover{
+        color:red;
+        text-shadow:1px 1px 10px red,-1px -1px 10px red;
+    }
+    .previosvideo{
+        color:aqua;
+        width:50px;
+        height:100px;
+        transition:1s ease;
+        font-size:70px;
+        border-radius:50%;
+        position:absolute;
+        top:600px;
+        left:20px;
+    }
+    .previosvideo:hover{
+        color:red;
+        text-shadow:1px 1px 10px red,-1px -1px 10px red;
+    }
+</style>
+<div class="video">
+
+    {% for row in rows%}
+    <h1>{{video.title}}</h1>
+
+      <video controls>
+           <source src="{{ row.videos.url }}" type="video/mp4">
+      </video>
+     {% endfor %}
+
+
+</div>
+
+<a href="http://127.0.0.1:8000/video/{{team.id}}?page={{previosP}}">
+    <div>
+        <h1 class="previosvideo">&larr;</h1>
+    </div>
+</a>
+
+<a href="http://127.0.0.1:8000/video/{{team.id}}?page={{nextP}}">
+    <div>
+        <h1 class="nextvideo">&rarr;</h1>
+    </div>
+</a>
+{% endblock %}

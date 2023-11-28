@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+    body{
+       color:white;
+       background:linear-gradient(90deg,black,black);
+       margin:0;
+       padding:25px;
+       padding-left:25px;
+
+    }
+    header{
+       z-index:2;
+       background:transparent;
+       position:fixed;
+       display:flex;
+       width:1400px;
+       height:50px;
+       align-items:center;
+       justify-content: space-between;
+    }
+    .links{
+       width:400px;
+       display:flex;
+       align-items:center;
+       justify-content: flex-start;
+       margin-left:10px;
+    }
+    button{
+       width:85px;
+       height:30px;
+       background:transparent;
+       border:1px solid white;
+       border-radius:5px;
+       transition:1s ease;
+       color:white;
+       margin-left:30px;
+    }
+    button:hover{
+       background:aqua;
+       box-shadow:1px 1px 20px aqua,-1px -1px 20px aqua;
+       color:black;
+       border:1px solid transparent;
+    }
+
+</style>
+<body>
+    <header>
+        <h1>&#9749;</h1>
+        <div class="links">
+
+            <a href="{% url 'index'%}"><button>Home</button></a>
+
+            <a href="{% url 'about'%}"><button>About</button></a>
+            <a href="{% url 'all_videos'%}"><button>All videos</button></a>
+            {% if user.is_authenticated%}
+            <a href="{% url 'contact'%}"><button>Contact</button></a>
+            {% else %}
+            {% endif %}
+
+            <button style="border:0;">{{user.username}}</button>
+        </div>
+    </header>
+
+
+
+
+
+
+    {% block content%}
+    {% endblock %}
+</body>
+</html>

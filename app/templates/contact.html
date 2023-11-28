@@ -1,0 +1,53 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+
+<style>
+    .reviews{
+        width: 45%;
+        height: 700px;
+        background: transparent;
+        border:1px solid white;
+        border-radius: 15px;
+        margin-top: 130px;
+        margin-left: 270px;
+
+    }
+    input{
+        background: transparent;
+        border: 1px solid white;
+        color: white;
+        border-radius: 15px;
+        width: 90%;
+        height: 50px;
+        margin-top: 7%;
+        margin-left: 5%;
+        margin-right: 2%;
+    }
+    .butt_reviews{
+        width: 80%;
+        height: 50px;
+        margin-top: 20%;
+    }
+</style>
+
+
+
+<div class="reviews">
+     <form method="post"> 
+        {% csrf_token %}
+        <input name="fullname" placeholder="fullname">
+        <input name="number" type="number" placeholder="number">
+        <input name="email" type="email" placeholder="email">
+        <input name="text" placeholder="text">
+        <button type="submit" class="butt_reviews" >send</button>
+        
+     </form>
+</div>
+
+
+
+
+
+{% endblock %}
