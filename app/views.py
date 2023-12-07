@@ -14,10 +14,24 @@ from django.conf import settings
 
 from django.contrib.auth import get_user_model
 
+import requests
 
+from datetime import datetime
 # Create your views here.
 
 def index(request):
+    response = requests.get('https://ipinfo.io')
+    city = response.json().get('city', 'Unknown City')
+
+    current_time = datetime.now().strftime('%Y-%m-%d')
+
+    api_key = '38721c06338aeed5fb7181083aa40f01'
+    params = {'q': city, 'appid': api_key, 'units': 'metric'}
+    weather_response = requests.get('http://api.openweathermap.org/data/2.5/weather', params=params)
+    weather_data = weather_response.json()
+
+
+
     is_admin = False
     if request.user.is_authenticated:
         try:
@@ -48,7 +62,13 @@ def index(request):
     contex = {
         'team':team,
         'is_admin': is_admin,
-
+        
+        'weather_data': weather_data['weather'][0]['description'],
+        'city':weather_data['name'],
+        'temp':weather_data['main']['temp'],
+        'wind':weather_data['wind']['speed'],
+        'time': current_time,
+        
     }
     return render(request,'index.html',contex)
 
@@ -154,9 +174,46 @@ def allVideos(request):
 def about(request):
     return render(request,'about.html')
 
+def profile(request):
+    ava = Ava.objects.get(user=request.user)
+    if request.method == 'POST':
+     
+        user = request.user
+        team_id = request.POST.get('teamObject')
+      
+       
+        if team_id:
+            teamObject = Team.objects.get(id=team_id)
+            try:
+               like_object = Like.objects.get(author=user, teamObject=teamObject)
+               like_object.delete()
+            except Like.DoesNotExist:
+               Like.objects.create(author=user, teamObject=teamObject)
+        elif new_image:
+            try:
+                Ava.objects.filter(user = user).update(ava = new_image)
+            except Ava.DoesNotExist:
+                Ava.objects.create(user = user,ava = new_image)
+            
+    new_image = request.GET.get('new_image')
+    if new_image:
+        try:
+            Ava.objects.filter(user = request.user).update(ava = new_image)
+        except Ava.DoesNotExist:
+            Ava.objects.create(user = user,ava = new_image)
+    liked_teams = Team.objects.filter(like__author=request.user)
+    liked_teams = liked_teams[::-1]
+ 
+    context = {
+        'rows':liked_teams,
+        'ava':ava,
+    }
+    return render(request,'profile.html',context)
+
 
 
 def contact(request):
+
     if request.method == "POST":
         fullname = request.POST.get('fullname')
         number = request.POST.get('number')

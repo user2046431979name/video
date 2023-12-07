@@ -55,8 +55,31 @@
       left:300px;
 
    }
-
-
+   .weather{
+      width: 25%;
+      height: 300px;
+      background: transparent;
+      border: 1px solid white;
+      border-radius: 15px;
+      margin-left: 60%;
+      margin-top: 15%;
+      transition: 1s ease;
+   }
+   .weather:hover{
+      width: 30%;
+      height: 350px;
+      
+      box-shadow:1px 1px 30px aqua,-1px -1px 30px aqua;
+   }
+   .weather h2{
+      margin: 7%;
+   }
+   .weather h5{
+      margin-left: 5%;
+      margin-top: 10%;
+      color: aqua;
+      font-family: 'Courier New', Courier, monospace;
+   }
 </style>
               <div class="auth">
 
@@ -95,7 +118,13 @@
     </div>
     {% endfor %}
 </div>
-
+<div class="weather">
+      <h2>city: {{city}}</h2>
+      <h2>weather: {{weather_data}}</h2>
+      <h2>temperature: {{temp}} </h2> 
+      <h2>wind: {{wind}} </h2> 
+      <h5>{{time}}</h5>
+</div>
 
 
 {% endblock %}

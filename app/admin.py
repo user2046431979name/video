@@ -7,4 +7,5 @@ admin.site.register(Admin)
 admin.site.register(Reviews)
 admin.site.register(Comments)
 admin.site.register(Like)
+admin.site.register(Ava)
 

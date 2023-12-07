@@ -2,7 +2,6 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 from django.db.models import Count
-
 # Create your models here.
 class Admin(models.Model):
     selectedUser = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -36,11 +35,11 @@ class Comments(models.Model):
     text = models.TextField(blank=True)
     teamobject = models.ForeignKey(Team,on_delete=models.CASCADE)
     author = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
-
+    
 class Like(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     teamObject = models.ForeignKey(Team,on_delete=models.CASCADE)
-
-
-
-
+ 
+class Ava(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    ava = models.ImageField()

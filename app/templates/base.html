@@ -30,7 +30,7 @@
        display:flex;
        align-items:center;
        justify-content: flex-start;
-       margin-left:10px;
+       margin-left:10%;
     }
     button{
        width:85px;
@@ -61,10 +61,12 @@
             <a href="{% url 'all_videos'%}"><button>All videos</button></a>
             {% if user.is_authenticated%}
             <a href="{% url 'contact'%}"><button>Contact</button></a>
+           
+            <a href="{% url 'profile' %}"> <button style="border:0;">{{user.username}}</button></a>
             {% else %}
             {% endif %}
 
-            <button style="border:0;">{{user.username}}</button>
+            
         </div>
     </header>
 

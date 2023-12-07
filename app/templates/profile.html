@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{%block content%}
+
+<style>
+    .info_user{
+        width: 45%;
+        height: 700px;
+        background: transparent;
+        border: 0;
+        border-radius: 15px;
+        margin-top: 10%;
+        margin-left: 10%;
+    }
+    .main_info{
+        background: transparent;
+        border-radius: 15px;
+        margin-top: 10%;
+        margin-left: 30%;
+
+
+    }
+    .list_team{
+        margin-top: 24%;
+        max-height: 390px;
+        overflow-y: auto;
+        border: 0;
+    }
+    .card_like{
+        
+        width: 50%;
+        height: 60px;
+        background: transparent;
+        border:1px solid white ;
+        margin-top: 5%;
+        margin-left: 5%;
+        transition: 1s ease;
+    }
+    .card_like:hover{
+        width: 55%;
+        height: 70px;
+        box-shadow:1px 1px 30px white,-1px -1px 30px white;
+    }
+    h2{
+        margin-top: -10%; 
+        text-align: center;
+        color: white;
+    }
+    h4{
+        margin-top: -5%;
+        margin-left: 25%;
+        color: aqua;
+    }
+    .like_from{
+        margin-top: 6%;
+    }
+    .main_info img{
+        width: 25%;
+        height: 120px;
+        border-radius: 50%;
+        border: 1px solid white;
+        margin-left: -35%;
+    }
+    .main_info h3{
+        margin-top: -20%;
+    }
+    .main_info form{
+        max-width: 500px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        margin-left: -35%;
+    }
+    .main_info form button{
+        width: 100%;
+        margin: 0%;
+        
+    }
+    .main_info input{
+        width: 15%;
+        margin-left: 5%;
+
+    }
+   
+</style>
+
+<DIV class="info_user">
+         <div class="main_info">
+           
+            <img src="{{ ava.ava.url }}">
+            <form method="get">  
+              {% csrf_token %}
+              <input type="file"  name="new_image">
+              <button type="submit">сменить</button>
+            </form>
+            <h3>username: {{user.username}}</h3>
+              
+         </div>
+
+         <div class="list_team">
+               {% for i in rows %}
+              <div class="card_like">
+                <a href="{% url 'series' i.id %}">
+                   <img src="{{i.cover.url}}" width="20%" height="45px">
+                   <h2>{{i.title}}</h2>
+                   
+                   <h4>{{i.count_videos}} серий</h4>
+                   
+                </a>
+                <form method="post" class="like_from" enctype="multipart/form-data" STYLE="margin-top: -15%; margin-left: 80%;">
+                    {% csrf_token %}
+                    <button style="border: 0px ; font-size: 1em; width: 40%;" type="submit">&#10006;</button>
+                    <input value="{{i.id}}" name="teamObject" style="width:0;height:0;background: transparent;border:0;">
+                   
+                    </form>   
+              </div>
+                {% endfor %}
+         </div>
+</DIV>
+
+
+{% endblock %}
